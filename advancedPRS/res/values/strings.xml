@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">advancedPRS</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_view_question">ViewQuestion</string>
+    <string name="title_activity_mult_choice">MultChoice</string>
+    <string name="title_activity_short_essay">ShortEssay</string>
+    <string name="title_activity_drawable">Drawable</string>
+    <string name="choose_from_below">Pleaase choose an option from below</string>
+
+</resources>

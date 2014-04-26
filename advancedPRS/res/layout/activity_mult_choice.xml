@@ -1,0 +1,71 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.advancedprs.MultChoice"
+    tools:ignore="MergeRootFrame" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:text="@string/choose_from_below" >
+
+            <requestFocus />
+        </EditText>
+
+        <RadioGroup
+            android:id="@+id/multichoicegroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <RadioButton
+                android:id="@+id/firstChoice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Are You Crazy?" />
+
+            <RadioButton
+                android:id="@+id/secondChoice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Youd better get some medicine" />
+
+            <RadioButton
+                android:id="@+id/thirdChoice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Like marijuana" />
+
+            <RadioButton
+                android:id="@+id/fourthChoice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fuck your" />
+
+            <RadioButton
+                android:id="@+id/fifthChoice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mother" />
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/submit"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit" />
+
+    </LinearLayout>
+
+</FrameLayout>
