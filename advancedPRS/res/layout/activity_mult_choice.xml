@@ -3,6 +3,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/green_cup"
     tools:context="com.example.advancedprs.MultChoice"
     tools:ignore="MergeRootFrame" >
 
@@ -31,31 +32,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="Are You Crazy?" />
+                android:text="A. Hi!" />
 
             <RadioButton
                 android:id="@+id/secondChoice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Youd better get some medicine" />
+                android:text="B. You look so cute~" />
 
             <RadioButton
                 android:id="@+id/thirdChoice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Like marijuana" />
+                android:text="C. My lady!" />
 
             <RadioButton
                 android:id="@+id/fourthChoice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fuck your" />
+                android:text="D. Could you..." />
 
             <RadioButton
                 android:id="@+id/fifthChoice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mother" />
+                android:text="E. Do me a favor?" />
         </RadioGroup>
 
         <Button

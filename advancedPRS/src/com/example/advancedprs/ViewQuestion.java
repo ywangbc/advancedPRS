@@ -41,20 +41,13 @@ public class ViewQuestion extends Activity {
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
 		
-		mTextView = (TextView) findViewById(R.id.requestresult);
 		
-		viewq = (Button) findViewById(R.id.viewquestion);
+		
+		
 		toChoice = (Button) findViewById(R.id.multichoice);
 		toEssay = (Button) findViewById(R.id.essayquestion);
 		toDrawable = (Button) findViewById(R.id.drawquestion);
-		viewq.setOnClickListener(new OnClickListener() {
-			String myfile;
-			@Override
-			public void onClick(View v) {
-				
-				new HttpGetTask().execute();
-			} 
-		});
+		
 		toChoice.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent viewqIntent = new Intent(ViewQuestion.this, MultChoice.class);
@@ -115,42 +108,6 @@ public class ViewQuestion extends Activity {
 		}
 	}
 	
-	private class HttpGetTask extends AsyncTask<Void, Void, String> {
-
-		private static final String TAG = "HttpPostTask";
-
-		// Get your own user name at http://www.geonames.org/login
-		private static final String USER_NAME = "aporter";
-
-		private static final String URL = "http://143.89.226.38/getMobileMsg.aspx?answer=heaaa";
-
-		AndroidHttpClient mClient = AndroidHttpClient.newInstance("");
-
-		@Override
-		protected String doInBackground(Void... params) {
-
-			HttpPost request = new HttpPost(URL);
-			ResponseHandler<String> responseHandler = new BasicResponseHandler();
-
-			try {
-				return mClient.execute(request, responseHandler);
-			} catch (ClientProtocolException exception) {
-				exception.printStackTrace();
-			} catch (IOException exception) {
-				exception.printStackTrace();
-			}
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(String result) {
-
-			if (null != mClient)
-				mClient.close();
-
-			mTextView.setText(result);
-
-		}
-	}
+	
 
 }
