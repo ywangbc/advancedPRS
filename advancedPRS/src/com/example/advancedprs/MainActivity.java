@@ -7,36 +7,40 @@ package com.example.advancedprs;
  * @author RyanWANG
  *
  */
-import com.example.advancedprs.R;
 import java.util.ArrayList;
-import javax.crypto.KeyGenerator;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
+import android.os.RemoteException;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+
 
 @SuppressLint("NewApi")
 public class MainActivity extends Activity {
 	EditText un, pw;
-	TextView error;
+	
 	Button ok;
 	Boolean validPassword;
 	private String resp;
 	private String errorMsg;
+	public final int TOASTINTERVAL = 3000;
 	
-
-
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -45,7 +49,7 @@ public class MainActivity extends Activity {
 		un = (EditText) findViewById(R.id.et_un);
 		pw = (EditText) findViewById(R.id.et_pw);
 		ok = (Button) findViewById(R.id.btn_login);
-		error = (TextView) findViewById(R.id.tv_error);
+
 
 		ok.setOnClickListener(new View.OnClickListener() {
 
@@ -65,15 +69,16 @@ public class MainActivity extends Activity {
 								un.getText().toString()));
 						postParameters.add(new BasicNameValuePair("password",
 								pw.getText().toString()));
+						/*
+						validPassword = checkValid(postParameters);
 						
-						//validPassword = checkValid(postParameters);
-						
-					    /*
+					    
 						if(validPassword)
 						{
 							resp = "Valid Password!";
 						}
 						*/
+						
 					}
 
 				}).start();
@@ -84,18 +89,20 @@ public class MainActivity extends Activity {
 					 * Inside the new thread we cannot update the main thread So
 					 * updating the main thread outside the new thread
 					 */
-
-					error.setText(resp);
+					
+					
+					
 
 					if (null != errorMsg && !errorMsg.isEmpty()) {
-						error.setText(errorMsg);
+						
 					}
 				} catch (Exception e) {
-					error.setText(e.getMessage());
+					
 				}
 				
+				
 				Intent viewqIntent = new Intent(MainActivity.this, ViewQuestion.class);
-				//myIntent.putExtra("key", value); //Optional parameters
+				//myIntent.putExtra("key", value); 
 				startActivity(viewqIntent);
 				
 			}
@@ -105,8 +112,73 @@ public class MainActivity extends Activity {
 	
 	Boolean checkValid(ArrayList<NameValuePair> postParameters)
 	{
+		if (mIsBound) {
+			// Send Message to the Logging Service
+			logMessageToService();
+		}
+		
+		else
+		{
+			Toast.makeText(this, "Haven't been bound to any service!", TOASTINTERVAL).show();
+		}
+		
 		return validPassword;
 		
+	}
+	
+	private final static String MESSAGE_KEY = "course.examples.Services.Logging.MESSAGE";
+	private final static int LOG_OP = 1;
+	private final static String TAG = "LoggingServiceClient";
+	
+	private final static Intent mLoggingServiceIntent = new Intent(
+			"com.example.advancedprsloginservice.LoginService");
+
+	private Messenger mMessengerToLoginService;
+	private boolean mIsBound;
+
+	// Object implementing Service Connection callbacks
+	private ServiceConnection mConnection = new ServiceConnection() {
+
+		public void onServiceConnected(ComponentName className, IBinder service) {
+
+			// Messenger object connected to the LoggingService
+			mMessengerToLoginService = new Messenger(service);
+
+			mIsBound = true;
+
+		}
+
+		public void onServiceDisconnected(ComponentName className) {
+
+			mMessengerToLoginService = null;
+
+			mIsBound = false;
+
+		}
+	};
+	
+	// Create a Message and sent it to the LoggingService
+	// via the mMessenger Object
+
+	private void logMessageToService() {
+
+		// Create Message 
+		Message msg = Message.obtain(null, LOG_OP);
+		Bundle bundle = new Bundle();
+		bundle.putString(MESSAGE_KEY, "Log This Message");
+		msg.setData(bundle);
+		/*
+		try {
+			
+			// Send Message to LoggingService using Messenger
+			//mMessengerToLoggingService.send(msg);
+
+		} 
+		
+		catch (RemoteException e) {
+			Log.e(TAG, e.toString());
+		}
+		*/
 	}
 	
 	

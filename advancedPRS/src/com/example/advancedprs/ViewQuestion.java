@@ -133,9 +133,7 @@ public class ViewQuestion extends Activity {
 			ResponseHandler<String> responseHandler = new BasicResponseHandler();
 
 			try {
-
 				return mClient.execute(request, responseHandler);
-
 			} catch (ClientProtocolException exception) {
 				exception.printStackTrace();
 			} catch (IOException exception) {
