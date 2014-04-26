@@ -32,7 +32,7 @@ public class MultChoice extends Activity {
 	
 	private void setText(String innerText)
 	{
-		myText = innerText;
+		myText = new String(innerText);
 	}
 	
 	@Override
@@ -49,6 +49,7 @@ public class MultChoice extends Activity {
 		answerGroup = (RadioGroup) findViewById(R.id.multichoicegroup);
 		radioSexGroup = (RadioGroup) findViewById(R.id.multichoicegroup);
 		
+		myText = new String("A%7C");
 		
 
 		
@@ -57,7 +58,29 @@ public class MultChoice extends Activity {
 	              for(int i=0; i<rg.getChildCount(); i++) {
 	                   RadioButton btn = (RadioButton) rg.getChildAt(i);
 	                   if(btn.getId() == checkedId) {
-	                        String text = (String) btn.getText();
+	                	   String text = "Non Selected|";
+	                	   switch(i)
+	                	   {
+	                	   case 0:
+	                		   text = "A%7C";
+	                		   break;
+	                	   case 1:
+	                		   text = "B%7C";
+	                		   break;
+	                	   case 2:
+	                		   text = "C%7C";
+	                		   break;   
+	                	   case 3:
+	                		   text = "D%7C";
+	                		   break;
+	                	   case 4:
+	                		   text = "E%7C";
+	                		   break;
+	                	   default:
+	                			   break;
+	                	   }
+	                	   
+	                        
 	                        // do something with text
 	                        setText(text);
 	                        return;
@@ -136,7 +159,7 @@ public class MultChoice extends Activity {
 		@Override
 		protected String doInBackground(String... params) {
 
-			String newURL =URL+params[0];
+			String newURL =new String(URL+params[0]);
 			HttpPost request = new HttpPost(newURL);
 			ResponseHandler<String> responseHandler = new BasicResponseHandler();
 
